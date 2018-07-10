@@ -10,12 +10,12 @@ const Header = props => {
     <Router>
         <div>
           <ul>
-            <span>
+            <span style={{marginRight: '1em'}}>
               <Link to="/">
                 <Button bsStyle="info">Welcome</Button>
               </Link>
             </span>
-            <span>
+            <span style={{marginRight: '1em'}}>
               <Link to="/list">
                 <Button bsStyle="info">TO DO List</Button>
               </Link>
