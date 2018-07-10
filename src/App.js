@@ -1,10 +1,10 @@
 import React from "react";
 import Header from './components/Header';
 
-const App = () => (
+const App = (props) => (
   <div>
     <Header />
-    {/* {this.props.children} */}
+    {props.children}
   </div>
 );
 
