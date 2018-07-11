@@ -7,11 +7,11 @@ import Congratulations from "./components/Congratulations";
 
 const App = () => (
   <Router>
-    <div>
+    <div style={{textAlign: 'center'}}>
       <ul>
-        <Button bsStyle="info" style={{marginRight: '1em'}}><Link to="/">Welcome</Link></Button>
-        <Button bsStyle="info" style={{marginRight: '1em'}}><Link to="/list">TO DO List</Link></Button>
-        <Button bsStyle="info" disabled style={{marginRight: '1em'}}><Link to="/congratulations">Congratulations</Link></Button>
+        <Link to="/"><Button bsStyle="info" style={{marginRight: '1em'}}>Welcome</Button></Link>
+        <Link to="/list"><Button bsStyle="info" style={{marginRight: '1em'}}>TO DO List</Button></Link>
+        <Link to="/congratulations"><Button bsStyle="info" disabled style={{marginRight: '1em'}}>Congratulations</Button></Link>
       </ul>
 
       <Route exact path="/" component={Welcome} />
