@@ -1,14 +1,14 @@
 import React from "react";
+import imageBackground from '../images/235.jpg';
 
-
-const imageWelcome = '../images/235.jpg';
-
-const styleWelcome = {
-  backgroundImage: `url(${imageWelcome})`,
+const myStyle = {
+  backgroundImage: "url("+imageBackground+")",
+  backgroundSize: 'cover',
+  height: '100vh'
 }
 
 const Welcome = () => (
-  <div style={styleWelcome}>
+  <div style={myStyle}>
     <h2>Welcome</h2>
   </div>
 );
