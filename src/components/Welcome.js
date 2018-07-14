@@ -1,10 +1,11 @@
 import React from "react";
-import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+import { FormGroup, FormControl } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 import imageBackground from '../images/235.jpg';
-import ToDoList from "./ToDoList";
-
+import {createUser} from '../actions/user';
 
 
 const myStyle = {
@@ -12,54 +13,79 @@ const myStyle = {
   backgroundSize: 'cover',
   height: '100vh',
   display: 'flex',
-  alignContent: 'spaceBetween',
-  justifyContent: 'center',
+  // alignContent: 'spaceBetween',
+  justifyContent: 'flexEnd',
   flexDirection: 'column',
-
-
 }
 
 class Welcome extends React.Component {
   state = {
-    name: '',
-    band: '',
+    user: {
+      name: '',
+      band: '',
+    }
+
   }
 
   handleChange = stateName => event => {
-    console.log(event);
-    this.setState({
+    const {user} = this.state;
+    const newUser = {
+      ...user,
       [stateName]: event.target.value,
+    };
+    this.setState({
+      user: newUser,
     })
   }
 
+  submitUser = event => {
+    event.preventDefault();
+    this.props.createUser(this.state.user);
+  }
+
   render() {
+    console.log(this.state.user);
+    console.log(this.props.userFromRedux);
     return (
       <div style={myStyle}>
         <h2 style={{flexGrow: 1, textAlign: 'center', marginTop: 120}}>Hello {this.state.name}</h2>
-        <form style={{flexGrow: 1, display: 'flex', justifyContent: 'center'}}>
+        <form onSubmit={this.submitUser} style={{flexGrow: 1, display: 'flex', justifyContent: 'center'}}>
           <FormGroup
             controlId="formBasicText"
             // validationState={this.getValidationState()}
           >
             <FormControl
               type="text"
-              value={this.state.name}
+              value={this.state.user.name}
               placeholder="Your Name"
               onChange={this.handleChange('name')}
+              style={{marginBottom: 20}}
             />
             <FormControl.Feedback />
             <FormControl
               type="text"
-              value={this.state.band}
+              value={this.state.user.band}
               placeholder="Your Favourite Band"
               onChange={this.handleChange('band')}
             />
           </FormGroup>
+          <Button bsStyle="info" type="submit" style={{width: 200, marginBottom: 20, textAlign: 'center', }}><Link to="/list">Next</Link></Button>
         </form>
-        <Button bsStyle="info" style={{width: 200, marginBottom: 20, textAlign: 'center'}}><Link to="/list">Next</Link></Button>
       </div>
     )
   }
 }
 
-export default Welcome;
+function mapStateToProps(state) {
+  return {
+    userFromRedux: state.user,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    createUser,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Welcome from "./components/Welcome";
 import ToDoList from "./components/ToDoList";
 import Congratulations from "./components/Congratulations";
