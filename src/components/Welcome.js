@@ -48,7 +48,7 @@ class Welcome extends React.Component {
     console.log(this.props.userFromRedux);
     return (
       <div style={myStyle}>
-        <h2 style={{flexGrow: 1, textAlign: 'center', marginTop: 120}}>Hello {this.state.name}</h2>
+        <h2 style={{flexGrow: 1, textAlign: 'center', marginTop: 120}}>Hello {this.state.user.name}</h2>
         <form onSubmit={this.submitUser} style={{flexGrow: 1, display: 'flex', justifyContent: 'center'}}>
           <FormGroup
             controlId="formBasicText"
