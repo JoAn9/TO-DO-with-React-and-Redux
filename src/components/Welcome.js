@@ -8,22 +8,42 @@ import imageBackground from '../images/235.jpg';
 import {createUser} from '../actions/user';
 
 
-const myStyle = {
+const container = {
   backgroundImage: "url("+imageBackground+")",
   backgroundSize: 'cover',
   height: '100vh',
   display: 'flex',
-  // alignContent: 'spaceBetween',
-  justifyContent: 'flexEnd',
+  alignContent: 'spaceBetween',
+  justifyContent: 'center',
   flexDirection: 'column',
-}
+};
+
+const styleHeader = {
+  flexGrow: 1,
+  textAlign: 'center',
+  marginTop: 120
+};
+
+const styleForm = {
+  flexGrow: 1,
+  display: 'flex',
+  justifyContent: 'center'
+};
+
+const styleButton = {
+  width: 200,
+  // textAlign: 'center',
+  position: 'fixed',
+  bottom: 20,
+};
 
 class Welcome extends React.Component {
   state = {
     user: {
       name: '',
       band: '',
-    }
+    },
+    buttonDisabled: true,
 
   }
 
@@ -47,9 +67,9 @@ class Welcome extends React.Component {
     console.log(this.state.user);
     console.log(this.props.userFromRedux);
     return (
-      <div style={myStyle}>
-        <h2 style={{flexGrow: 1, textAlign: 'center', marginTop: 120}}>Hello {this.state.user.name}</h2>
-        <form onSubmit={this.submitUser} style={{flexGrow: 1, display: 'flex', justifyContent: 'center'}}>
+      <div style={container}>
+        <h2 style={styleHeader}>Hello {this.state.user.name}</h2>
+        <form onSubmit={this.submitUser} style={styleForm}>
           <FormGroup
             controlId="formBasicText"
             // validationState={this.getValidationState()}
@@ -69,16 +89,18 @@ class Welcome extends React.Component {
               onChange={this.handleChange('band')}
             />
           </FormGroup>
-          <Button bsStyle="info" type="submit" style={{width: 200, marginBottom: 20, textAlign: 'center', }}><Link to="/list">Next</Link></Button>
+          <Button bsStyle="info" type="submit" style={styleButton}>
+            <Link to="/list">Next</Link>
+          </Button>
         </form>
       </div>
     )
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(store) {
   return {
-    userFromRedux: state.user,
+    userFromRedux: store.user,
   }
 }
 
