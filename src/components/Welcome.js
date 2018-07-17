@@ -90,7 +90,7 @@ class Welcome extends React.Component {
             />
           </FormGroup>
           <Button bsStyle="info" type="submit" style={styleButton}>
-            <Link to="/list">Next</Link>
+            Next
           </Button>
         </form>
       </div>
