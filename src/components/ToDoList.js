@@ -19,19 +19,19 @@ const styles = theme => ({
 class ToDoList extends React.Component {
   render() {
 
-    // const {classes} = this.props;
+    const { classes } = this.props;
 
     return (
       <div>
         <Grid container spacing={24}>
-          <Grid item xs={12} md={4}>
-            <Paper>xs=6 sm=3</Paper>
+          <Grid item xs={12} sm={4}>
+            <Paper className={classes.paper}>xs=6 sm=3</Paper>
           </Grid>
-        <Grid item xs={12} md={4}>
-          <Paper>xs=6 sm=3</Paper>
+        <Grid item xs={12} sm={4}>
+          <Paper className={classes.paper}>xs=6 sm=3</Paper>
         </Grid>
-        <Grid item xs={12} md={4}>
-          <Paper>xs=6 sm=3</Paper>
+        <Grid item xs={12} sm={4}>
+          <Paper className={classes.paper}>xs=6 sm=3</Paper>
         </Grid>
   </Grid>
 </div>
@@ -39,4 +39,4 @@ class ToDoList extends React.Component {
   }
 }
 
-export default ToDoList;
+export default withStyles(styles)(ToDoList);
