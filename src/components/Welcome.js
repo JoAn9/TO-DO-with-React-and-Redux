@@ -1,9 +1,13 @@
 import React from "react";
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { FormGroup, FormControl } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+// import { FormGroup, FormControl } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import imageBackground from '../images/235.jpg';
 import {createUser} from '../actions/user';
 
@@ -64,34 +68,30 @@ class Welcome extends React.Component {
   }
 
   render() {
+    // const { classes } = this.props;
     console.log(this.state.user);
     console.log(this.props.userFromRedux);
     return (
       <div style={container}>
         <h2 style={styleHeader}>Hello {this.state.user.name}</h2>
-        <form onSubmit={this.submitUser} style={styleForm}>
-          <FormGroup
-            controlId="formBasicText"
-            // validationState={this.getValidationState()}
-          >
-            <FormControl
-              type="text"
-              value={this.state.user.name}
-              placeholder="Your Name"
-              onChange={this.handleChange('name')}
-              style={{marginBottom: 20}}
-            />
-            <FormControl.Feedback />
-            <FormControl
-              type="text"
-              value={this.state.user.band}
-              placeholder="Your Favourite Band"
-              onChange={this.handleChange('band')}
-            />
-          </FormGroup>
-          <Button bsStyle="info" type="submit" style={styleButton}>
-            Next
-          </Button>
+        <form style={styleForm} noValidate autoComplete="off" onSubmit={this.submitUser} style={styleForm}>
+          <TextField
+            id="name"
+            label="Name"
+            value={this.state.user.name}
+            onChange={this.handleChange('name')}
+            margin="normal"
+            style={{margin: 20}}
+          />
+          <TextField
+            id="band"
+            label="Band"
+            value={this.state.user.band}
+            onChange={this.handleChange('band')}
+            margin="normal"
+            style={{margin: 20}}
+          />
+          <Link to="/list"><Button type="submit">Next</Button></Link>
         </form>
       </div>
     )
