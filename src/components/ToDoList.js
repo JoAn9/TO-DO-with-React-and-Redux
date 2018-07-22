@@ -62,7 +62,12 @@ class ToDoList extends React.Component {
   render() {
 
     const { classes } = this.props;
-    console.log(this.state.todosArray);
+    const { todosArray } = this.state;
+    console.log(todosArray);
+
+    const tasksArray = todosArray.map(item => <Paper className={classes.paper} key={item.id}>{item.task}</Paper>);
+
+    console.log(tasksArray);
 
     return (
       <div>
@@ -71,7 +76,7 @@ class ToDoList extends React.Component {
             <Paper className={classes.paper}>
               Things to do
             </Paper>
-            <Paper className={classes.paper}>xs=12 sm=4</Paper>
+            {tasksArray}
             <Button
               variant="contained"
               onClick={this.handleClickOpen}
