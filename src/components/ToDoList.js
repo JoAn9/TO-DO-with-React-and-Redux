@@ -59,15 +59,28 @@ class ToDoList extends React.Component {
     this.setState({ task: event.target.value });
   }
 
+  handleInprogress = id => {
+    console.log('in progress' + id);
+  }
+
+  handleDone = id => {
+    console.log('Done' + id);
+  }
+
   render() {
 
     const { classes } = this.props;
     const { todosArray } = this.state;
     console.log(todosArray);
 
-    const tasksArray = todosArray.map(item => <Paper className={classes.paper} key={item.id}>{item.task}</Paper>);
-
-    console.log(tasksArray);
+    const tasksArray = todosArray.map(item => (
+      <Paper className={classes.paper} key={item.id}>
+        {item.task}
+        <br />
+        <Button variant="raised" onClick={() => this.handleInprogress(item.id)} size="small">In Progress</Button>
+        <Button variant="raised" onClick={() => this.handleDone(item.id)} size="small">Done</Button>
+      </Paper>
+    ));
 
     return (
       <div>
@@ -115,11 +128,9 @@ class ToDoList extends React.Component {
           </Grid>
         <Grid item xs={12} sm={4}>
           <Paper className={classes.paper}>In progress</Paper>
-          <Paper className={classes.paper}>xs=12 sm=4</Paper>
         </Grid>
         <Grid item xs={12} sm={4}>
           <Paper className={classes.paper}>Done</Paper>
-          <Paper className={classes.paper}>xs=12 sm=4</Paper>
         </Grid>
       </Grid>
       </div>
