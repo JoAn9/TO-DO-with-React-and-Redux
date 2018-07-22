@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
@@ -25,6 +27,8 @@ const styles = theme => ({
 class ToDoList extends React.Component {
   state = {
     open: false,
+    todosArray: [],
+    taskId: 0,
     task: '',
   }
 
@@ -39,6 +43,18 @@ class ToDoList extends React.Component {
     });
   };
 
+  handleAdding = () => {
+    this.setState({
+      open: false,
+      todosArray: [...this.state.todosArray, {
+        id: this.state.taskId,
+        task: this.state.task
+      }],
+      task: '',
+      taskId: this.state.taskId + 1,
+    });
+  }
+
   handleChangeTask = event => {
     this.setState({ task: event.target.value });
   }
@@ -46,6 +62,7 @@ class ToDoList extends React.Component {
   render() {
 
     const { classes } = this.props;
+    console.log(this.state.todosArray);
 
     return (
       <div>
@@ -85,7 +102,7 @@ class ToDoList extends React.Component {
                 <Button onClick={this.handleClose}>
                   Cancel
                 </Button>
-                <Button onClick={this.handleClose} color="primary" variant="contained">
+                <Button onClick={this.handleAdding} color="primary" variant="contained">
                   Add
                 </Button>
               </DialogActions>
@@ -105,4 +122,11 @@ class ToDoList extends React.Component {
   }
 }
 
-export default withStyles(styles)(ToDoList);
+function mapStateToProps(store) {
+  return {
+    userFromRedux: store.user.user,
+  }
+}
+
+export default connect(mapStateToProps,
+  null)(withStyles(styles)(ToDoList));
