@@ -12,6 +12,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {saveTasks} from '../actions/tasks';
 
 
 const styles = theme => ({
@@ -52,7 +53,7 @@ class ToDoList extends React.Component {
       }],
       task: '',
       taskId: this.state.taskId + 1,
-    });
+    }, () => this.props.saveTasks(this.state.todosArray));
   }
 
   handleChangeTask = event => {
@@ -69,9 +70,10 @@ class ToDoList extends React.Component {
 
   render() {
 
-    const { classes } = this.props;
+    const { classes, userFromRedux, tasksToDo } = this.props;
     const { todosArray } = this.state;
-    console.log(todosArray);
+    console.log(userFromRedux);
+    console.log(tasksToDo);
 
     const tasksArray = todosArray.map(item => (
       <Paper className={classes.paper} key={item.id}>
@@ -141,8 +143,15 @@ class ToDoList extends React.Component {
 function mapStateToProps(store) {
   return {
     userFromRedux: store.user.user,
+    tasksToDo: store.tasks,
   }
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    saveTasks,
+  }, dispatch);
+}
+
 export default connect(mapStateToProps,
-  null)(withStyles(styles)(ToDoList));
+  mapDispatchToProps)(withStyles(styles)(ToDoList));

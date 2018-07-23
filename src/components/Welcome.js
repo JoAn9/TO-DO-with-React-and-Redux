@@ -64,6 +64,7 @@ class Welcome extends React.Component {
 
   submitUser = event => {
     event.preventDefault();
+    console.log('submit & createUser');
     this.props.createUser(this.state.user);
   }
 
@@ -71,6 +72,7 @@ class Welcome extends React.Component {
     // const { classes } = this.props;
     console.log(this.state.user);
     console.log(this.props.userFromRedux);
+    console.log(this.props.tasksToDo);
     return (
       <div style={container}>
         <h2 style={styleHeader}>Hello {this.state.user.name}</h2>
@@ -91,7 +93,8 @@ class Welcome extends React.Component {
             margin="normal"
             style={{margin: 20}}
           />
-          <Link to="/list"><Button type="submit">Next</Button></Link>
+          {/* <Link to="/list"><Button type="submit">Next</Button></Link> */}
+          <Button type="submit">Next</Button>
         </form>
       </div>
     )
@@ -101,6 +104,7 @@ class Welcome extends React.Component {
 function mapStateToProps(store) {
   return {
     userFromRedux: store.user,
+    tasksToDo: store.tasks,
   }
 }
 
