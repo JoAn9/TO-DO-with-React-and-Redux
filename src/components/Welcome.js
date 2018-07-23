@@ -93,8 +93,8 @@ class Welcome extends React.Component {
             margin="normal"
             style={{margin: 20}}
           />
-          {/* <Link to="/list"><Button type="submit">Next</Button></Link> */}
-          <Button type="submit">Next</Button>
+          <Link to="/list"><Button type="submit">Next</Button></Link>
+          {/* <Button type="submit">Next</Button> */}
         </form>
       </div>
     )
