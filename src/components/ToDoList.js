@@ -73,16 +73,16 @@ class ToDoList extends React.Component {
     const { classes, userFromRedux, tasksToDo } = this.props;
     const { todosArray } = this.state;
     console.log(userFromRedux);
-    console.log(tasksToDo);
+    console.log(Object.values(todosArray));
 
-    const tasksArray = todosArray.map(item => (
+    const tasksArray = tasksToDo ? Object.values(todosArray).map(item => (
       <Paper className={classes.paper} key={item.id}>
         {item.task}
         <br />
         <Button variant="raised" onClick={() => this.handleInprogress(item.id)} size="small">In Progress</Button>
         <Button variant="raised" onClick={() => this.handleDone(item.id)} size="small">Done</Button>
       </Paper>
-    ));
+    )) : '';
 
     return (
       <div>
@@ -142,7 +142,7 @@ class ToDoList extends React.Component {
 
 function mapStateToProps(store) {
   return {
-    userFromRedux: store.user.user,
+    userFromRedux: store.user,
     tasksToDo: store.tasks,
   }
 }
