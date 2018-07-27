@@ -87,7 +87,7 @@ class ToDoList extends React.Component {
     console.log(userFromRedux);
     console.log(tasksToDo);
 
-    const tasksArray = tasksToDo ? Object.values(todosArray).map(item => (
+    const tasksArray = tasksToDo ? tasksToDo.tasks.map(item => (
       <Paper className={classes.paper} key={item.id}>
         {item.task}
         <br />
