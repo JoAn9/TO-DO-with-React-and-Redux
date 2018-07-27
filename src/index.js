@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
 // import thunk from 'redux-thunk';
@@ -12,11 +12,11 @@ import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore();
 
-ReactDOM.render(
+ReactDOM.render((
   <Provider store={store}>
-    <Router>
+    <BrowserRouter>
       <App />
-    </Router>
+    </BrowserRouter>
   </Provider>
-  , document.getElementById('root'));
+), document.getElementById('root'));
 registerServiceWorker();

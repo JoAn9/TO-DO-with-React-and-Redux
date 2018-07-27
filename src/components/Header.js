@@ -1,37 +1,30 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Navbar, Jumbotron, Button } from 'react-bootstrap';
+import { BrowserRouter, Route, Link } from "react-router-dom";
+import Button from '@material-ui/core/Button';
 import Welcome from "./Welcome";
 import ToDoList from "./ToDoList";
 import Congratulations from "./Congratulations";
 
-const Header = props => {
-  return (
-    <Router>
-        <div>
-          <ul>
-            <span style={{marginRight: '1em'}}>
-              <Link to="/">
-                <Button bsStyle="info">Welcome</Button>
-              </Link>
-            </span>
-            <span style={{marginRight: '1em'}}>
-              <Link to="/list">
-                <Button bsStyle="info">TO DO List</Button>
-              </Link>
-            </span>
-            <span>
-              <Link to="/congratulations">
-                <Button bsStyle="info" disabled>Congratulations</Button>
-              </Link>
-            </span>
-          </ul>
+const Header = props => (
+  <header>
+    <nav>
+      <span style={{marginRight: '1em'}}>
+        <Link to="/">
+          <Button color="primary">Welcome</Button>
+        </Link>
+      </span>
+      <span style={{marginRight: '1em'}}>
+        <Link to="/list">
+          <Button color="primary">TO DO List</Button>
+        </Link>
+      </span>
+      <span>
+        <Link to="/congratulations">
+          <Button disabled color="primary">Congratulations</Button>
+        </Link>
+      </span>
+    </nav>
+  </header>
+)
 
-          <Route exact path="/" component={Welcome} />
-          <Route path="/list" component={ToDoList} />
-          <Route path="/congratulations" component={Congratulations} />
-        </div>
-      </Router>
-  )
-}
  export default Header;
