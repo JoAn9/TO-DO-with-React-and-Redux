@@ -12,7 +12,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import {saveTasks} from '../actions/tasks';
+import { saveTasks } from '../actions/tasks';
 
 
 const styles = theme => ({
@@ -33,6 +33,10 @@ class ToDoList extends React.Component {
     task: '',
   }
 
+  // componentDidMount = () => {
+  //   console.log(this.props.tasksToDo);
+  // }
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -45,16 +49,24 @@ class ToDoList extends React.Component {
   };
 
   handleAdding = () => {
+    this.props.saveTasks(this.state.task);
     this.setState({
       open: false,
-      todosArray: [...this.state.todosArray, {
-        id: this.state.taskId,
-        task: this.state.task
-      }],
       task: '',
-      taskId: this.state.taskId + 1,
-    }, () => this.props.saveTasks(this.state.todosArray));
+    });
   }
+
+  // handleAdding = () => {
+  //   this.setState({
+  //     open: false,
+  //     todosArray: [...this.state.todosArray, {
+  //       id: this.state.taskId,
+  //       task: this.state.task
+  //     }],
+  //     task: '',
+  //     taskId: this.state.taskId + 1,
+  //   }, () => this.props.saveTasks(this.state.todosArray));
+  // }
 
   handleChangeTask = event => {
     this.setState({ task: event.target.value });
@@ -73,7 +85,7 @@ class ToDoList extends React.Component {
     const { classes, userFromRedux, tasksToDo } = this.props;
     const { todosArray } = this.state;
     console.log(userFromRedux);
-    console.log(Object.values(todosArray));
+    console.log(tasksToDo);
 
     const tasksArray = tasksToDo ? Object.values(todosArray).map(item => (
       <Paper className={classes.paper} key={item.id}>

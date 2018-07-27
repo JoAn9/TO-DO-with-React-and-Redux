@@ -1,6 +1,6 @@
-export function saveTasks(tasks) {
+export function saveTasks(task) {
   return {
     type: 'SAVE_TASKS',
-    tasks,
+    task: task,
   }
 }
