@@ -65,7 +65,7 @@ class Welcome extends React.Component {
   submitUser = event => {
     event.preventDefault();
     console.log('submit & createUser');
-    this.props.createUser(this.state.user);
+    this.props.createUser(this.state.user.name, this.state.user.band);
   }
 
   render() {
@@ -93,9 +93,9 @@ class Welcome extends React.Component {
             margin="normal"
             style={{margin: 20}}
           />
-          <Link to="/list"><Button type="submit">Next</Button></Link>
-          {/* <Button type="submit">Next</Button> */}
+          <Button type="submit">Create User</Button>
         </form>
+        <Link to="/list">Add some tasks to do</Link>
       </div>
     )
   }
