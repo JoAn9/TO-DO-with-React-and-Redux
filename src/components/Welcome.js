@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import {bindActionCreators} from 'redux';
-import { Link } from "react-router-dom";
+import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 // import { FormGroup, FormControl } from 'react-bootstrap';
 // import { Button } from 'react-bootstrap';
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import imageBackground from '../images/235.jpg';
-import {createUser} from '../actions/user';
-
+import { createUser } from '../actions/user';
 
 const container = {
-  backgroundImage: "url("+imageBackground+")",
+  backgroundImage: 'url(' + imageBackground + ')',
   backgroundSize: 'cover',
   height: '100vh',
   display: 'flex',
@@ -23,15 +23,15 @@ const container = {
 };
 
 const styleHeader = {
-  flexGrow: 1,
+  // flexGrow: 1,
   textAlign: 'center',
-  marginTop: 120
+  // marginTop: 100,
 };
 
 const styleForm = {
-  flexGrow: 1,
+  // flexGrow: 1,
   display: 'flex',
-  justifyContent: 'center'
+  justifyContent: 'center',
 };
 
 const styleButton = {
@@ -39,6 +39,8 @@ const styleButton = {
   // textAlign: 'center',
   position: 'fixed',
   bottom: 20,
+  display: 'flex',
+  justifyContent: 'center',
 };
 
 class Welcome extends React.Component {
@@ -48,25 +50,24 @@ class Welcome extends React.Component {
       band: '',
     },
     buttonDisabled: true,
-
-  }
+  };
 
   handleChange = stateName => event => {
-    const {user} = this.state;
+    const { user } = this.state;
     const newUser = {
       ...user,
       [stateName]: event.target.value,
     };
     this.setState({
       user: newUser,
-    })
-  }
+    });
+  };
 
   submitUser = event => {
     event.preventDefault();
     console.log('submit & createUser');
     this.props.createUser(this.state.user.name, this.state.user.band);
-  }
+  };
 
   render() {
     // const { classes } = this.props;
@@ -77,27 +78,41 @@ class Welcome extends React.Component {
       <div style={container}>
         <h2 style={styleHeader}>Hello {this.state.user.name}</h2>
         <form style={styleForm} noValidate autoComplete="off" onSubmit={this.submitUser} style={styleForm}>
-          <TextField
-            id="name"
-            label="Name"
-            value={this.state.user.name}
-            onChange={this.handleChange('name')}
-            margin="normal"
-            style={{margin: 20}}
-          />
-          <TextField
-            id="band"
-            label="Band"
-            value={this.state.user.band}
-            onChange={this.handleChange('band')}
-            margin="normal"
-            style={{margin: 20}}
-          />
-          <Button type="submit">Create User</Button>
+          <Grid container justify="center">
+            <Grid item xs={12} sm={3}>
+              <TextField
+                id="name"
+                label="Name"
+                value={this.state.user.name}
+                onChange={this.handleChange('name')}
+                margin="normal"
+                style={{ margin: 20 }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <TextField
+                id="band"
+                label="Band"
+                value={this.state.user.band}
+                onChange={this.handleChange('band')}
+                margin="normal"
+                style={{ margin: 20 }}
+              />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <Button variant="raised" type="submit">
+                Create User
+              </Button>
+            </Grid>
+          </Grid>
         </form>
-        <Link to="/list">Add some tasks to do</Link>
+        <Grid container>
+          <Grid item>
+            <Link to="/list" style={styleButton}><Button variant="raised">Add some tasks to do</Button></Link>
+          </Grid>
+        </Grid>
       </div>
-    )
+    );
   }
 }
 
@@ -105,13 +120,19 @@ function mapStateToProps(store) {
   return {
     userFromRedux: store.user,
     tasksToDo: store.tasks,
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    createUser,
-  }, dispatch);
+  return bindActionCreators(
+    {
+      createUser,
+    },
+    dispatch
+  );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Welcome);
