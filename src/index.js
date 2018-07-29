@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
+import createHistory from 'history/createBrowserHistory';
 // import thunk from 'redux-thunk';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';

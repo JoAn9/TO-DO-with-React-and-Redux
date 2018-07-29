@@ -11,37 +11,29 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import imageBackground from '../images/235.jpg';
 import { createUser } from '../actions/user';
+import Header from './Header';
 
 const container = {
   backgroundImage: 'url(' + imageBackground + ')',
   backgroundSize: 'cover',
   height: '100vh',
+  // flex: 1,
   display: 'flex',
-  alignContent: 'spaceBetween',
-  justifyContent: 'center',
-  flexDirection: 'column',
+  // alignContent: 'spaceBetween',
+  // justifyContent: 'center',
+  // flexDirection: 'column',
 };
 
-const styleHeader = {
-  // flexGrow: 1,
-  textAlign: 'center',
-  // marginTop: 100,
-};
-
-const styleForm = {
-  // flexGrow: 1,
-  display: 'flex',
-  justifyContent: 'center',
-};
-
-const styleButton = {
+const textFieldStyle = {
+  marginLeft: 50,
+  marginRight: 50,
   width: 200,
-  // textAlign: 'center',
-  position: 'fixed',
-  bottom: 20,
-  display: 'flex',
-  justifyContent: 'center',
 };
+
+const buttonStyle = {
+  margin: 50,
+}
+
 
 class Welcome extends React.Component {
   state = {
@@ -75,43 +67,54 @@ class Welcome extends React.Component {
     console.log(this.props.userFromRedux);
     console.log(this.props.tasksToDo);
     return (
-      <div style={container}>
-        <h2 style={styleHeader}>Hello {this.state.user.name}</h2>
-        <form style={styleForm} noValidate autoComplete="off" onSubmit={this.submitUser} style={styleForm}>
-          <Grid container justify="center">
-            <Grid item xs={12} sm={3}>
-              <TextField
-                id="name"
-                label="Name"
-                value={this.state.user.name}
-                onChange={this.handleChange('name')}
-                margin="normal"
-                style={{ margin: 20 }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <TextField
-                id="band"
-                label="Band"
-                value={this.state.user.band}
-                onChange={this.handleChange('band')}
-                margin="normal"
-                style={{ margin: 20 }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <Button variant="raised" type="submit">
-                Create User
-              </Button>
-            </Grid>
+      <Grid container style={container}>
+        <Grid container spacing={24} direction="column" alignItems="center" justify="center">
+          <Grid item style={{margin: 50}}>
+            <h2>Hello {this.state.user.name}</h2>
           </Grid>
-        </form>
-        <Grid container>
+          <Grid item>
+            <form noValidate autoComplete="off" onSubmit={this.submitUser}>
+              <Grid container justify="center" spacing={24}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    id="name"
+                    label="Your Name"
+                    value={this.state.user.name}
+                    onChange={this.handleChange('name')}
+                    margin="normal"
+                    style={textFieldStyle}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    id="band"
+                    label="Your Favourite Band"
+                    value={this.state.user.band}
+                    onChange={this.handleChange('band')}
+                    margin="normal"
+                    style={textFieldStyle}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Button variant="raised" type="submit" style={buttonStyle}>
+                    Create User
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          </Grid>
+        {/* <Grid container direction="column" justify="center" alignContent="center">
           <Grid item>
             <Link to="/list" style={styleButton}><Button variant="raised">Add some tasks to do</Button></Link>
           </Grid>
+        </Grid> */} 
         </Grid>
-      </div>
+        <Grid container direction="column" alignItems="center">
+          <Grid item style={{marginBottom: 60}}>
+            <Header />
+          </Grid>
+        </Grid>
+      </Grid>
     );
   }
 }
