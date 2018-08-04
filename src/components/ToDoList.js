@@ -56,20 +56,10 @@ class ToDoList extends React.Component {
     });
   }
 
-  // handleAdding = () => {
-  //   this.setState({
-  //     open: false,
-  //     todosArray: [...this.state.todosArray, {
-  //       id: this.state.taskId,
-  //       task: this.state.task
-  //     }],
-  //     task: '',
-  //     taskId: this.state.taskId + 1,
-  //   }, () => this.props.saveTasks(this.state.todosArray));
-  // }
-
   handleChangeTask = event => {
-    this.setState({ task: event.target.value });
+    this.setState({ 
+      task: event.target.value
+    });
   }
 
   handleInprogress = id => {

@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
+import { push } from 'react-router-redux';
 // import { FormGroup, FormControl } from 'react-bootstrap';
 // import { Button } from 'react-bootstrap';
 import Button from '@material-ui/core/Button';
@@ -32,6 +33,7 @@ const textFieldStyle = {
 
 const buttonStyle = {
   margin: 50,
+  // width: 100,
 }
 
 
@@ -59,11 +61,13 @@ class Welcome extends React.Component {
     event.preventDefault();
     console.log('submit & createUser');
     this.props.createUser(this.state.user.name, this.state.user.band);
+    this.props.history.push('/list');
+    console.log(this.props);
   };
 
   render() {
     // const { classes } = this.props;
-    console.log(this.state.user);
+    // console.log(this.state.user);
     console.log(this.props.userFromRedux);
     console.log(this.props.tasksToDo);
     return (
@@ -103,11 +107,6 @@ class Welcome extends React.Component {
               </Grid>
             </form>
           </Grid>
-        {/* <Grid container direction="column" justify="center" alignContent="center">
-          <Grid item>
-            <Link to="/list" style={styleButton}><Button variant="raised">Add some tasks to do</Button></Link>
-          </Grid>
-        </Grid> */} 
         </Grid>
         <Grid container direction="column" alignItems="center">
           <Grid item style={{marginBottom: 60}}>
@@ -130,6 +129,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       createUser,
+      push,
     },
     dispatch
   );
