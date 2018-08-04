@@ -26,14 +26,16 @@ const container = {
 };
 
 const textFieldStyle = {
-  marginLeft: 50,
-  marginRight: 50,
+  marginLeft: 70,
+  marginRight: 70,
   width: 200,
 };
 
 const buttonStyle = {
-  margin: 50,
-  // width: 100,
+  marginLeft: 70,
+  marginRight: 70,
+  marginTop: 50,
+  width: 150,
 }
 
 

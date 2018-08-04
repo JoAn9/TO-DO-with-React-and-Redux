@@ -12,6 +12,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Typography from '@material-ui/core/Typography';
 import { saveTasks } from '../actions/tasks';
 
 
@@ -74,8 +75,6 @@ class ToDoList extends React.Component {
 
     const { classes, userFromRedux, tasksToDo } = this.props;
     const { todosArray } = this.state;
-    console.log(userFromRedux);
-    console.log(tasksToDo);
 
     const tasksArray = tasksToDo ? tasksToDo.tasks.map(item => (
       <Paper className={classes.paper} key={item.id}>
@@ -89,6 +88,13 @@ class ToDoList extends React.Component {
     return (
       <div>
         <Grid container spacing={24}>
+          <Grid item xs={3} />
+          <Grid item xs={6}>
+            <Typography variant="display2" gutterBottom style={{marginTop: '0.9em'}}>
+            {userFromRedux.user.name}'s list TO DO
+            </Typography>
+          </Grid>
+          <Grid item xs={3} />
           <Grid item xs={12} sm={4}>
             <Paper className={classes.paper}>
               Things to do
@@ -98,7 +104,7 @@ class ToDoList extends React.Component {
               variant="contained"
               onClick={this.handleClickOpen}
               className={classes.paper}
-              style={{width: '100%'}}
+              style={{width: '100'}}
             >
               Add new task
             </Button>
@@ -130,13 +136,13 @@ class ToDoList extends React.Component {
               </DialogActions>
             </Dialog>
           </Grid>
-        <Grid item xs={12} sm={4}>
-          <Paper className={classes.paper}>In progress</Paper>
+          <Grid item xs={12} sm={4}>
+            <Paper className={classes.paper}>In progress</Paper>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <Paper className={classes.paper}>Done</Paper>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <Paper className={classes.paper}>Done</Paper>
-        </Grid>
-      </Grid>
       </div>
     );
   }
