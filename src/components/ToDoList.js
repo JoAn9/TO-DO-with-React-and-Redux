@@ -13,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
-import { saveTasks } from '../actions/tasks';
+import { saveTasks, taskInProgress } from '../actions/tasks';
 
 
 const styles = theme => ({
@@ -65,6 +65,7 @@ class ToDoList extends React.Component {
 
   handleInprogress = id => {
     console.log('in progress' + id);
+    this.props.taskInProgress(id);
   }
 
   handleDone = id => {
@@ -158,6 +159,7 @@ function mapStateToProps(store) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     saveTasks,
+    taskInProgress,
   }, dispatch);
 }
 

@@ -4,3 +4,10 @@ export function saveTasks(task) {
     task,
   }
 }
+
+export function taskInProgress(task) {
+  return {
+    type: 'TASK_IN_PROGRESS',
+    taskInProgress,
+  }
+}
