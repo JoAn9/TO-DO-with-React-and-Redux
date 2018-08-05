@@ -64,13 +64,11 @@ class Welcome extends React.Component {
     console.log('submit & createUser');
     this.props.createUser(this.state.user.name, this.state.user.band);
     this.props.history.push('/list');
-    console.log(this.props);
   };
 
   render() {
     // const { classes } = this.props;
     // console.log(this.state.user);
-    console.log(this.props.userFromRedux);
     console.log(this.props.tasksToDo);
     return (
       <Grid container style={container}>

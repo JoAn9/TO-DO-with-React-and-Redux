@@ -1,6 +1,9 @@
 export default function tasksReducer(state = {
-  tasks: [], id: 0, task: '', 
-  tasksInProgress: [] 
+  tasks: [], 
+  id: 0, 
+  task: '', 
+  tasksInProgress: [],
+  taskInProgress: '',
 }, 
 action) {
   switch(action.type) {

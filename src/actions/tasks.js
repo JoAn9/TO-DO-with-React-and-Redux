@@ -5,7 +5,7 @@ export function saveTasks(task) {
   }
 }
 
-export function taskInProgress(task) {
+export function addInProgress(taskInProgress) {
   return {
     type: 'TASK_IN_PROGRESS',
     taskInProgress,
