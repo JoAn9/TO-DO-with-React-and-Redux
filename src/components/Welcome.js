@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
 import { push } from 'react-router-redux';
-// import { FormGroup, FormControl } from 'react-bootstrap';
-// import { Button } from 'react-bootstrap';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -61,14 +58,11 @@ class Welcome extends React.Component {
 
   submitUser = event => {
     event.preventDefault();
-    console.log('submit & createUser');
     this.props.createUser(this.state.user.name, this.state.user.band);
     this.props.history.push('/list');
   };
 
   render() {
-    // const { classes } = this.props;
-    // console.log(this.state.user);
     console.log(this.props.tasksToDo);
     return (
       <Grid container style={container}>

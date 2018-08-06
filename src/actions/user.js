@@ -4,7 +4,5 @@ export function createUser(name, band) {
       type: 'CREATE_USER',
       user: {name, band},
     });
-    // console.log('blabla');
-    // dispatch(push('/list'));
   }
 }

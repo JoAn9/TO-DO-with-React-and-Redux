@@ -1,6 +1,8 @@
 export default {
-  user: {
-    name: '',
-    band: '',
-  },
+    tasks: [], 
+    id: 0, 
+    task: '', 
+    tasksInProgress: [],
+    taskInProgress: '',
+    user: {name: '', band: ''}
 }

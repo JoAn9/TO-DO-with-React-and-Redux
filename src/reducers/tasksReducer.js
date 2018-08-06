@@ -1,11 +1,6 @@
-export default function tasksReducer(state = {
-  tasks: [], 
-  id: 0, 
-  task: '', 
-  tasksInProgress: [],
-  taskInProgress: '',
-}, 
-action) {
+import initialState from './initialState';
+
+export default function tasksReducer(state = initialState, action) {
   switch(action.type) {
     case 'SAVE_TASKS':
     return {
