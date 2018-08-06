@@ -13,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
-import { saveTasks, addInProgress, addToDo } from '../actions/tasks';
+import { saveTasks, addInProgress, addToDo, addDone } from '../actions/tasks';
 
 
 const styles = theme => ({
@@ -68,8 +68,10 @@ class ToDoList extends React.Component {
     }
   }
 
-  handleDone = id => {
+  handleDoneProgress = id => {
     console.log('Done' + id);
+    const taskDone = this.props.tasksInProgress.find(item => item.id === id);
+    this.props.addDone(taskDone);
   }
 
   handleToDo = id => {
@@ -80,7 +82,7 @@ class ToDoList extends React.Component {
 
   render() {
 
-    const { classes, userFromRedux, tasksToDo, tasksInProgress } = this.props;
+    const { classes, userFromRedux, tasksToDo, tasksInProgress, tasksDone } = this.props;
     const { todosArray } = this.state;
 
     console.log(this.props.tasksInProgress);
@@ -99,7 +101,16 @@ class ToDoList extends React.Component {
         {item.task}
         <br />
         <Button variant="raised" onClick={() => this.handleToDo(item.id)} size="small">To do</Button>
-        <Button variant="raised" onClick={() => this.handleDone(item.id)} size="small">Done</Button>
+        <Button variant="raised" onClick={() => this.handleDoneProgress(item.id)} size="small">Done</Button>
+      </Paper>
+    )) : '';
+
+    const tasksDoneArray = tasksDone ? tasksDone.map(item => (
+      <Paper className={classes.paper} key={item.id}>
+        {item.task}
+        <br />
+        <Button variant="raised" onClick={() => console.log(item.id)} size="small">To do</Button>
+        <Button variant="raised" onClick={() => console.log(item.id)} size="small">Done</Button>
       </Paper>
     )) : '';
 
@@ -160,6 +171,7 @@ class ToDoList extends React.Component {
           </Grid>
           <Grid item xs={12} sm={4}>
             <Paper className={classes.paper}>Done</Paper>
+            {tasksDoneArray}
           </Grid>
         </Grid>
       </div>
@@ -172,6 +184,7 @@ function mapStateToProps(store) {
     userFromRedux: store.user,
     tasksToDo: store.tasks.tasks,
     tasksInProgress: store.tasks.tasksInProgress,
+    tasksDone: store.tasks.tasksDone,
   }
 }
 
@@ -180,6 +193,7 @@ function mapDispatchToProps(dispatch) {
     saveTasks,
     addInProgress,
     addToDo,
+    addDone,
   }, dispatch);
 }
 

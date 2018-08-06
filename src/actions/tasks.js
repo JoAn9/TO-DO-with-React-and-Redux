@@ -18,3 +18,10 @@ export function addToDo(taskToDo) {
     taskToDo,
   }
 }
+
+export function addDone(taskDone) {
+  return {
+    type: 'TASK_DONE',
+    taskDone,
+  }
+}

@@ -4,5 +4,6 @@ export default {
     task: '', 
     tasksInProgress: [],
     taskInProgress: '',
+    tasksDone: [],
     user: {name: '', band: ''}
 }
