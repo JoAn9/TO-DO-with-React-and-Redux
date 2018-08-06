@@ -12,6 +12,7 @@ export default function tasksReducer(state = initialState, action) {
       return {
         ...state,
         tasksInProgress: [...state.tasksInProgress, action.taskInProgress],
+        tasks: [...state.tasks.filter(item => item.id !== action.taskInProgress.id)],
       };
     default: return {
       ...state,

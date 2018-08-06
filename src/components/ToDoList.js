@@ -72,6 +72,10 @@ class ToDoList extends React.Component {
     console.log('Done' + id);
   }
 
+  handleToDo = id => {
+    console.log('to do ' + id)
+  }
+
   render() {
 
     const { classes, userFromRedux, tasksToDo, tasksInProgress } = this.props;
@@ -92,7 +96,7 @@ class ToDoList extends React.Component {
       <Paper className={classes.paper} key={item.id}>
         {item.task}
         <br />
-        <Button variant="raised" onClick={() => this.handleInprogress(item.id)} size="small">In Progress</Button>
+        <Button variant="raised" onClick={() => this.handleToDo(item.id)} size="small">To do</Button>
         <Button variant="raised" onClick={() => this.handleDone(item.id)} size="small">Done</Button>
       </Paper>
     )) : '';
