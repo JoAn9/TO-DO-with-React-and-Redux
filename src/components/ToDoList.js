@@ -13,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
-import { saveTasks, addInProgress } from '../actions/tasks';
+import { saveTasks, addInProgress, addToDo } from '../actions/tasks';
 
 
 const styles = theme => ({
@@ -73,7 +73,9 @@ class ToDoList extends React.Component {
   }
 
   handleToDo = id => {
-    console.log('to do ' + id)
+    console.log('to do ' + id);
+    const taskToDo = this.props.tasksInProgress.find(item => item.id === id);
+    this.props.addToDo(taskToDo);
   }
 
   render() {
@@ -177,6 +179,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     saveTasks,
     addInProgress,
+    addToDo,
   }, dispatch);
 }
 

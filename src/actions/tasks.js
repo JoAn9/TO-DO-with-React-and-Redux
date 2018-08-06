@@ -11,3 +11,10 @@ export function addInProgress(taskInProgress) {
     taskInProgress,
   }
 }
+
+export function addToDo(taskToDo) {
+  return {
+    type: 'TASK_TO_DO',
+    taskToDo,
+  }
+}
