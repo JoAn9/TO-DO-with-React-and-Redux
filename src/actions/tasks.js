@@ -35,7 +35,14 @@ export function addDoneTodo(taskDone) {
 
 export function addTodoDone(task) {
   return {
-    type: 'TASK_TODO_DONE',
+    type: 'TASK_TODO_FROM_DONE',
+    task,
+  }
+}
+
+export function addInprogressFromDone(task) {
+  return {
+    type: 'TASK_INPROGRESS_FROM_DONE',
     task,
   }
 }
