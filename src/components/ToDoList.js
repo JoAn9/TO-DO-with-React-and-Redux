@@ -13,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
-import { saveTasks, addInProgress, addToDo, addDone } from '../actions/tasks';
+import { saveTasks, addInProgress, addToDo, addDone, addDoneTodo, addTodoDone } from '../actions/tasks';
 
 
 const styles = theme => ({
@@ -68,6 +68,11 @@ class ToDoList extends React.Component {
     }
   }
 
+  handleDoneTodo = id => {
+    const taskDone = this.props.tasksToDo.find(item => item.id === id);
+    this.props.addDoneTodo(taskDone);
+  }
+
   handleDoneProgress = id => {
     console.log('Done' + id);
     const taskDone = this.props.tasksInProgress.find(item => item.id === id);
@@ -79,6 +84,13 @@ class ToDoList extends React.Component {
     const taskToDo = this.props.tasksInProgress.find(item => item.id === id);
     this.props.addToDo(taskToDo);
   }
+
+  handleTodoDone = id => {
+    const taskToDo = this.props.tasksToDo.find(item => item.id === id);
+    this.props.addTodoDone(taskToDo);
+  }
+
+  handleInprogressDone
 
   render() {
 
@@ -92,7 +104,7 @@ class ToDoList extends React.Component {
         {item.task}
         <br />
         <Button variant="raised" onClick={() => this.handleInprogress(item.id)} size="small">In Progress</Button>
-        <Button variant="raised" onClick={() => this.handleDone(item.id)} size="small">Done</Button>
+        <Button variant="raised" onClick={() => this.handleDoneTodo(item.id)} size="small">Done</Button>
       </Paper>
     )) : '';
 
@@ -109,8 +121,8 @@ class ToDoList extends React.Component {
       <Paper className={classes.paper} key={item.id}>
         {item.task}
         <br />
-        <Button variant="raised" onClick={() => console.log(item.id)} size="small">To do</Button>
-        <Button variant="raised" onClick={() => console.log(item.id)} size="small">Done</Button>
+        {/* <Button variant="raised" onClick={this.handleTodoDone} size="small">To do</Button> */}
+        <Button variant="raised" onClick={() => console.log(item.id)} size="small">In Progress</Button>
       </Paper>
     )) : '';
 
@@ -194,6 +206,8 @@ function mapDispatchToProps(dispatch) {
     addInProgress,
     addToDo,
     addDone,
+    addDoneTodo,
+    addTodoDone,
   }, dispatch);
 }
 
