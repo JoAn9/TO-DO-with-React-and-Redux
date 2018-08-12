@@ -14,6 +14,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import { saveTasks, addInProgress, addToDo, addDone, addDoneTodo, addTodoDone, addInprogressFromDone } from '../actions/tasks';
+import imageBackground from '../images/159.jpg';
 
 
 const styles = theme => ({
@@ -23,6 +24,11 @@ const styles = theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  container: {
+    backgroundImage: 'url(' + imageBackground + ')',
+    backgroundSize: 'cover',
+    height: '100vh',
+  }
 });
 
 
@@ -95,6 +101,10 @@ class ToDoList extends React.Component {
     this.props.addInprogressFromDone(task);
   }
 
+  handleDelete = id => {
+    
+  }
+
   render() {
 
     const { classes, userFromRedux, tasksToDo, tasksInProgress, tasksDone } = this.props;
@@ -126,19 +136,20 @@ class ToDoList extends React.Component {
         <br />
         <Button variant="raised" onClick={() => this.handleTodoDone(item.id)} size="small">To do</Button>
         <Button variant="raised" onClick={() => this.handleInprogressFromDone(item.id)} size="small">In Progress</Button>
+        <Button variant="raised" onClick={() => this.handleDelete(item.id)} size="small">Delete</Button>
       </Paper>
     )) : '';
 
     return (
-      <div>
+      <div className={classes.container}>
         <Grid container spacing={24}>
-          <Grid item xs={3} />
+          <Grid item xs={4} />
           <Grid item xs={6}>
             <Typography variant="display2" gutterBottom style={{marginTop: '0.9em'}}>
             {userFromRedux.user.name}'s list TO DO
             </Typography>
           </Grid>
-          <Grid item xs={3} />
+          <Grid item xs={2} />
           <Grid item xs={12} sm={4}>
             <Paper className={classes.paper}>
               Things to do
