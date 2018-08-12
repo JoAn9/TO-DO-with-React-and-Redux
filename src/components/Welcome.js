@@ -66,13 +66,13 @@ class Welcome extends React.Component {
     console.log(this.props.tasksToDo);
     return (
       <Grid container style={container}>
-        <Grid container spacing={24} direction="column" alignItems="center" justify="center">
+        <Grid container direction="column" alignItems="center" justify="center">
           <Grid item style={{margin: 50}}>
             <h2>Hello {this.state.user.name}</h2>
           </Grid>
           <Grid item>
             <form noValidate autoComplete="off" onSubmit={this.submitUser}>
-              <Grid container justify="center" spacing={24}>
+              <Grid container justify="center">
                 <Grid item xs={12} sm={6}>
                   <TextField
                     id="name"
@@ -102,7 +102,7 @@ class Welcome extends React.Component {
             </form>
           </Grid>
         </Grid>
-        <Grid container direction="column" alignItems="center">
+        <Grid container direction="column" justify="flex-end" alignItems="center">
           <Grid item style={{marginBottom: 60}}>
             <Header />
           </Grid>

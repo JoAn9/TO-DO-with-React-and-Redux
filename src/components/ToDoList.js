@@ -137,7 +137,7 @@ class ToDoList extends React.Component {
 
     return (
       <div className={classes.container}>
-        <Grid container spacing={24}>
+        <Grid container>
           <Grid item xs={4} />
           <Grid item xs={6}>
             <Typography variant="display2" gutterBottom style={{marginTop: '0.9em'}}>
@@ -170,7 +170,7 @@ class ToDoList extends React.Component {
                   value={this.state.task}
                   onChange={this.handleChangeTask}
                   margin="dense"
-                  id="newTask"
+                  imargid="newTask"
                   label="New Task"
                   type="text"
                   fullWidth
