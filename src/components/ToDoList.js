@@ -13,7 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
-import { saveTasks, addInProgress, addToDo, addDone, addDoneTodo, addTodoDone, addInprogressFromDone } from '../actions/tasks';
+import { saveTasks, addInProgress, addToDo, addDone, addDoneTodo, addTodoDone, addInprogressFromDone, del } from '../actions/tasks';
 import imageBackground from '../images/159.jpg';
 
 
@@ -67,11 +67,7 @@ class ToDoList extends React.Component {
 
   handleInprogress = id => {
     const taskInProgress = this.props.tasksToDo.filter(item => item.id === id);
-    if(this.props.tasksInProgress.some(el => el.id === taskInProgress[0].id)) {
-      console.log('repeated');
-    } else {
-      this.props.addInProgress(taskInProgress[0]);
-    }
+    this.props.addInProgress(taskInProgress[0]);
   }
 
   handleDoneTodo = id => {
@@ -80,13 +76,11 @@ class ToDoList extends React.Component {
   }
 
   handleDoneProgress = id => {
-    console.log('Done' + id);
     const taskDone = this.props.tasksInProgress.find(item => item.id === id);
     this.props.addDone(taskDone);
   }
 
   handleToDo = id => {
-    console.log('to do ' + id);
     const taskToDo = this.props.tasksInProgress.find(item => item.id === id);
     this.props.addToDo(taskToDo);
   }
@@ -102,7 +96,8 @@ class ToDoList extends React.Component {
   }
 
   handleDelete = id => {
-    
+    const task = this.props.tasksDone.find(item => item.id === id);
+    this.props.delete(task);
   }
 
   render() {
@@ -223,6 +218,7 @@ function mapDispatchToProps(dispatch) {
     addDoneTodo,
     addTodoDone,
     addInprogressFromDone,
+    delete: del,
   }, dispatch);
 }
 

@@ -46,3 +46,10 @@ export function addInprogressFromDone(task) {
     task,
   }
 }
+
+export function del(task) {
+  return {
+    type: 'TASK_DELETE',
+    task,
+  }
+}
