@@ -11,29 +11,26 @@ import imageBackground from '../images/235.jpg';
 import { createUser } from '../actions/user';
 import Header from './Header';
 
-const container = {
-  backgroundImage: 'url(' + imageBackground + ')',
-  backgroundSize: 'cover',
-  height: '100vh',
-  // flex: 1,
-  display: 'flex',
-  // alignContent: 'spaceBetween',
-  // justifyContent: 'center',
-  // flexDirection: 'column',
-};
 
-const textFieldStyle = {
-  marginLeft: 70,
-  marginRight: 70,
-  width: 200,
-};
-
-const buttonStyle = {
-  marginLeft: 70,
-  marginRight: 70,
-  marginTop: 50,
-  width: 150,
-}
+const styles = theme => ({
+  container: {
+    backgroundImage: 'url(' + imageBackground + ')',
+    backgroundSize: 'cover',
+    height: '100vh',
+    display: 'flex',
+  },
+  textFieldStyle: {
+    marginLeft: 70,
+    marginRight: 70,
+    width: 200,
+  },
+  buttonStyle: {
+    marginLeft: 70,
+    marginRight: 70,
+    marginTop: 50,
+    width: 150,
+  },
+});
 
 
 class Welcome extends React.Component {
@@ -64,8 +61,9 @@ class Welcome extends React.Component {
 
   render() {
     console.log(this.props.tasksToDo);
+    const { classes } = this.props;
     return (
-      <Grid container style={container}>
+      <Grid container className={classes.container}>
         <Grid container direction="column" alignItems="center" justify="center">
           <Grid item style={{margin: 50}}>
             <h2>Hello {this.state.user.name}</h2>
@@ -80,7 +78,7 @@ class Welcome extends React.Component {
                     value={this.state.user.name}
                     onChange={this.handleChange('name')}
                     margin="normal"
-                    style={textFieldStyle}
+                    className={classes.textFieldStyle}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -90,11 +88,11 @@ class Welcome extends React.Component {
                     value={this.state.user.band}
                     onChange={this.handleChange('band')}
                     margin="normal"
-                    style={textFieldStyle}
+                    className={classes.textFieldStyle}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <Button variant="raised" type="submit" style={buttonStyle}>
+                  <Button variant="raised" type="submit" className={classes.buttonStyle} color="primary">
                     Create User
                   </Button>
                 </Grid>
@@ -132,4 +130,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Welcome);
+)(withStyles(styles)(Welcome));

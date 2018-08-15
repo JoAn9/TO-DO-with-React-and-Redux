@@ -10,7 +10,6 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
 import { saveTasks, addInProgress, addToDo, addDone, addDoneTodo, addTodoDone, addInprogressFromDone, del } from '../actions/tasks';
@@ -103,7 +102,6 @@ class ToDoList extends React.Component {
   render() {
 
     const { classes, userFromRedux, tasksToDo, tasksInProgress, tasksDone } = this.props;
-    const { todosArray } = this.state;
 
     console.log(this.props.tasksInProgress);
 
