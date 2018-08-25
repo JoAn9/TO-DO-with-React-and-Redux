@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
@@ -20,15 +21,12 @@ const styles = theme => ({
     display: 'flex',
   },
   header: {
-    // margin: 60,
-    marginLeft: 300,
+    margin: 50,
+    // marginLeft: 0,
+    textAlign: 'center',
   },
   textFieldStyle: {
     margin: 50,
-    // marginRight: 100,
-    // paddingLeft: 100,
-    // paddingRight: 100,
-    // width: 200,
     fontSize: '2em',
   },
   buttonStyle: {
@@ -47,7 +45,7 @@ class Welcome extends React.Component {
       name: '',
       band: '',
     },
-    buttonDisabled: true,
+    errorMsg: '',
   };
 
   handleChange = stateName => event => {
@@ -63,8 +61,17 @@ class Welcome extends React.Component {
 
   submitUser = event => {
     event.preventDefault();
-    this.props.createUser(this.state.user.name, this.state.user.band);
-    this.props.history.push('/list');
+    if(this.state.user.name === '' || this.state.user.band === '') {
+      this.setState({
+        errorMsg: 'Please enter your name and favourite band'
+      })
+    } else {
+      this.setState({
+        errorMsg: '',
+      });
+      this.props.createUser(this.state.user.name, this.state.user.band);
+      this.props.history.push('/list');
+    }
   };
 
   render() {
@@ -100,7 +107,15 @@ class Welcome extends React.Component {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Button variant="raised" type="submit" className={classes.buttonStyle} color="primary">
+                <Typography variant="subheading" color="error">
+                  {this.state.errorMsg}
+                </Typography>
+                <Button 
+                  variant="raised"
+                  type="submit"
+                  className={classes.buttonStyle}
+                  color="primary"
+                >
                   Create User
                 </Button>
               </Grid>
