@@ -56,6 +56,7 @@ class Welcome extends React.Component {
     };
     this.setState({
       user: newUser,
+      errorMsg: '',
     });
   };
 
