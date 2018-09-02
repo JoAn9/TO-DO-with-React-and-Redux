@@ -12,6 +12,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from '@material-ui/core/Typography';
+import { push } from 'react-router-redux';
 import { saveTasks, addInProgress, addToDo, addDone, addDoneTodo, addTodoDone, addInprogressFromDone, del } from '../actions/tasks';
 import imageBackground from '../images/159.jpg';
 
@@ -40,7 +41,9 @@ class ToDoList extends React.Component {
   }
 
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({ 
+      open: true
+    });
   };
 
   handleClose = () => {
@@ -72,11 +75,13 @@ class ToDoList extends React.Component {
   handleDoneTodo = id => {
     const taskDone = this.props.tasksToDo.find(item => item.id === id);
     this.props.addDoneTodo(taskDone);
+    this.props.history.push('/congratulations');
   }
 
   handleDoneProgress = id => {
     const taskDone = this.props.tasksInProgress.find(item => item.id === id);
     this.props.addDone(taskDone);
+    this.props.history.push('/congratulations');
   }
 
   handleToDo = id => {
@@ -103,7 +108,7 @@ class ToDoList extends React.Component {
 
     const { classes, userFromRedux, tasksToDo, tasksInProgress, tasksDone } = this.props;
 
-    console.log(this.props.tasksInProgress);
+    // console.log(this.props.tasksInProgress);
 
     const tasksArray = tasksToDo ? tasksToDo.map(item => (
       <Paper className={classes.paper} key={item.id}>
