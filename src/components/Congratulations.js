@@ -7,28 +7,41 @@ import YoutubeFrame from './YoutubeFrame';
 // dodac cancel axios
 // dodac toastr i errors handling
 
+const CancelToken = axios.CancelToken;
+let cancel;
 
 class Congratulations extends React.Component {
   state = {
     video: '',
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.getSong();
+  }
+
+  componentWillUnmount = () => {
+    console.log(cancel);
+    cancel();
   }
 
   getSong = () => {
     let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${this.props.userFromRedux.user.band}&type=video&part=snippet,contentDetails,statistics,statu&key=AIzaSyDCaZeK9ihaPCkzDDtKaAkGwVl_Pq5LktA`;
       
-    axios.get(url)
-      .then(response => {
-        console.log(response);
-        const randomNmb1to4 = Math.floor(Math.random() * 4) + 1;
-        this.setState({
-          video: response.data.items[randomNmb1to4].id.videoId,
-        });
+    axios.get(url, {
+      cancelToken: new CancelToken(function executor(c) {
+        // An executor function receives a cancel function as a parameter
+        cancel = c;
       })
-  }
+    })
+    .then(response => {
+      console.log(response);
+      const randomNmb1to4 = Math.floor(Math.random() * 4) + 1;
+      this.setState({
+        video: response.data.items[randomNmb1to4].id.videoId,
+      });
+    })
+  };
+
 
   render() {
     const { userFromRedux } = this.props;
