@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import axios from 'axios';
 import YoutubeFrame from './YoutubeFrame';
+import { ErrorHandler } from './errorHandler';
 
 
 // dodac cancel axios
@@ -20,18 +21,17 @@ class Congratulations extends React.Component {
   }
 
   componentWillUnmount = () => {
-    console.log(cancel);
+    console.log('unmonted');
     cancel();
   }
 
   getSong = () => {
-    let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${this.props.userFromRedux.user.band}&type=video&part=snippet,contentDetails,statistics,statu&key=AIzaSyDCaZeK9ihaPCkzDDtKaAkGwVl_Pq5LktA`;
-      
+    // let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${this.props.userFromRedux.user.band}&type=video&part=snippet,contentDetails,statistics,statu&key=AIzaSyDCaZeK9ihaPCkzDDtKaAkGwVl_Pq5LktA`;
+    let url = 'https://httpstat.us/401';
+
     axios.get(url, {
-      cancelToken: new CancelToken(function executor(c) {
+      cancelToken: new CancelToken(c => cancel = c)
         // An executor function receives a cancel function as a parameter
-        cancel = c;
-      })
     })
     .then(response => {
       console.log(response);
@@ -40,6 +40,10 @@ class Congratulations extends React.Component {
         video: response.data.items[randomNmb1to4].id.videoId,
       });
     })
+    .catch(error => {
+      console.dir(error);
+      ErrorHandler.handle(error);
+    });
   };
 
 
