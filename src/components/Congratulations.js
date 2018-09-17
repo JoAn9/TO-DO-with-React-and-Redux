@@ -26,8 +26,8 @@ class Congratulations extends React.Component {
   }
 
   getSong = () => {
-    // let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${this.props.userFromRedux.user.band}&type=video&part=snippet,contentDetails,statistics,statu&key=AIzaSyDCaZeK9ihaPCkzDDtKaAkGwVl_Pq5LktA`;
-    let url = 'https://httpstat.us/401';
+    let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${this.props.userFromRedux.user.band}&type=video&part=snippet,contentDetails,statistics,statu&key=AIzaSyDCaZeK9ihaPCkzDDtKaAkGwVl_Pq5LktA`;
+    // let url = 'https://httpstat.us/500';
 
     axios.get(url, {
       cancelToken: new CancelToken(c => cancel = c)
