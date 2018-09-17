@@ -1,1 +1,3 @@
-# TO-DO-with-React-and-Redux
+# APPLICATION TO DO WITH A SURPRICE
+
+With React, Redux and Material-UI. Responsive and cool...
