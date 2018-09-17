@@ -10,7 +10,6 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import imageBackground from '../images/235.jpg';
 import { createUser } from '../actions/user';
-import Header from './Header';
 
 
 const styles = theme => ({
@@ -76,7 +75,6 @@ class Welcome extends React.Component {
   };
 
   render() {
-    console.log(this.props.tasksToDo);
     const { classes } = this.props;
     return (
       <Grid container className={classes.container}>

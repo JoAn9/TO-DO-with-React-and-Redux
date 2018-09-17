@@ -5,8 +5,9 @@ import YoutubeFrame from './YoutubeFrame';
 import { ErrorHandler } from './errorHandler';
 
 
-// dodac cancel axios
-// dodac toastr i errors handling
+// przycisk back przeniesc na dol
+// widok na komory
+// proptypes dodac
 
 const CancelToken = axios.CancelToken;
 let cancel;
@@ -21,7 +22,6 @@ class Congratulations extends React.Component {
   }
 
   componentWillUnmount = () => {
-    console.log('unmonted');
     cancel();
   }
 
@@ -34,7 +34,6 @@ class Congratulations extends React.Component {
         // An executor function receives a cancel function as a parameter
     })
     .then(response => {
-      console.log(response);
       const randomNmb1to4 = Math.floor(Math.random() * 4) + 1;
       this.setState({
         video: response.data.items[randomNmb1to4].id.videoId,
