@@ -5,7 +5,7 @@ import YoutubeFrame from './YoutubeFrame';
 import { ErrorHandler } from './errorHandler';
 
 
-// przycisk back przeniesc na dol
+
 // widok na komory
 // proptypes dodac
 
@@ -26,7 +26,7 @@ class Congratulations extends React.Component {
   }
 
   getSong = () => {
-    let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${this.props.userFromRedux.user.band}&type=video&part=snippet,contentDetails,statistics,statu&key=AIzaSyDCaZeK9ihaPCkzDDtKaAkGwVl_Pq5LktA`;
+    let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${this.props.userBand}&type=video&part=snippet,contentDetails,statistics,statu&key=AIzaSyDCaZeK9ihaPCkzDDtKaAkGwVl_Pq5LktA`;
     // let url = 'https://httpstat.us/500';
 
     axios.get(url, {
@@ -47,17 +47,18 @@ class Congratulations extends React.Component {
 
 
   render() {
-    const { userFromRedux } = this.props;
+    const { userName } = this.props;
     const { video } = this.state;
     return (
-      <YoutubeFrame video={video} user={userFromRedux} />
+      <YoutubeFrame video={video} userName={userName} />
     )
   }
 }
 
 function mapStateToProps(store) {
   return {
-    userFromRedux: store.user,
+    userName: store.user.user.name,
+    userBand: store.user.user.band,
   }
 }
 

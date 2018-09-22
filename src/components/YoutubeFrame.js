@@ -15,19 +15,24 @@ const styles = theme => ({
   },
   header: {
     color: '#fff',
-    padding: 50,
+    padding: 40,
   },
 });
 
 
 class YoutubeFrame extends React.Component {
+
+  static defaultProps = {
+    userName: 'Winner',
+  }
+
   render() {
-    const { classes, user } = this.props;
+    const { classes, userName } = this.props;
     return (
       <Grid container direction="column" alignItems="center" className={classes.container}>
         <Grid item>
           <h2 className={classes.header}>
-            Congratulations {user.user.name}
+            Congratulations {userName}
           </h2>
         </Grid>
         <Grid item>

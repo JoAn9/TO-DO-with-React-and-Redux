@@ -106,9 +106,7 @@ class ToDoList extends React.Component {
 
   render() {
 
-    const { classes, userFromRedux, tasksToDo, tasksInProgress, tasksDone } = this.props;
-
-    // console.log(this.props.tasksInProgress);
+    const { classes, userName, tasksToDo, tasksInProgress, tasksDone } = this.props;
 
     const tasksArray = tasksToDo ? tasksToDo.map(item => (
       <Paper className={classes.paper} key={item.id}>
@@ -144,7 +142,7 @@ class ToDoList extends React.Component {
           <Grid item xs={4} />
           <Grid item xs={6}>
             <Typography variant="display2" gutterBottom style={{marginTop: '0.9em'}}>
-            {userFromRedux.user.name}'s list TO DO
+            {userName}'s list TO DO
             </Typography>
           </Grid>
           <Grid item xs={2} />
@@ -172,11 +170,12 @@ class ToDoList extends React.Component {
                   autoFocus
                   value={this.state.task}
                   onChange={this.handleChangeTask}
-                  margin="dense"
+                  // margin="dense"
                   imargid="newTask"
                   label="New Task"
                   type="text"
-                  fullWidth
+                  // fullWidth
+                  style={{width: 400}}
                 />
               </DialogContent>
               <DialogActions>
@@ -205,7 +204,7 @@ class ToDoList extends React.Component {
 
 function mapStateToProps(store) {
   return {
-    userFromRedux: store.user,
+    userName: store.user.user.name,
     tasksToDo: store.tasks.tasks,
     tasksInProgress: store.tasks.tasksInProgress,
     tasksDone: store.tasks.tasksDone,
